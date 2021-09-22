@@ -144,7 +144,8 @@ namespace FarmProductWPF
         {
             //依照輸入的作物、年份做篩選並繫結至dgFarmProduct
             var result = farmProductDataList.Where(f => f.name.Contains(txtName.Text.ToLower())).ToList();
-            result = result.Where(f => f.year.Contains(cbYear.SelectedItem.ToString())).ToList();
+            string filterYear = cbYear.SelectedItem != null ? cbYear.SelectedItem.ToString() : ""; // 若年份篩選未選則設為空字串
+            result = result.Where(f => f.year.Contains(filterYear)).ToList();
             dgFarmProduct.ItemsSource = result;
 
             AdjustDG();
